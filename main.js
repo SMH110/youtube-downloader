@@ -3,7 +3,7 @@ const stream = require("./stream");
 const express = require("express");
 const ytdl = require("ytdl-core");
 const app = express();
-
+const contentDisposition = require("content-disposition");
 app.use(express.json(), express.urlencoded({ extended: false }));
 const indexHtml = require("./index-html");
 
@@ -41,7 +41,7 @@ app.post("/", async (req, res) => {
     console.log(url);
     res.header(
       "Content-Disposition",
-      `attachment;  filename=${title}.${extension}`
+      `attachment;  filename=${contentDisposition(title)}.${extension}`
     );
     return ytdl(url, {
       quality: selectedQuality,

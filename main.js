@@ -37,6 +37,8 @@ app.post("/", async (req, res) => {
     const videoInfo = await ytdl.getBasicInfo(url);
     const title = videoInfo.videoDetails.title;
     const extension = selectedOption === "video" ? "mp4" : "mp3";
+    console.log("title", title);
+    console.log(url);
     res.header(
       "Content-Disposition",
       `attachment;  filename=${title}.${extension}`
